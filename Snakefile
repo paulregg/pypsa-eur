@@ -75,10 +75,15 @@ rule retrieve_load_data:
 
 rule build_load_data:
     input: "data/load_raw.csv"
-    output: "resources/load.csv"
+    output: "resources/load_unscaled.csv"
     log: "logs/build_load_data.log"
     script: 'scripts/build_load_data.py'
     
+rule scale_load_data:
+    input: "resources/load_unscaled.csv"
+    output: "resources/load.csv"
+    log: "logs/build_load_data.log"
+    script: 'scripts/scale_load_data.py'
 
 rule build_powerplants:
     input:
